@@ -91,7 +91,7 @@ type guh = $<Part & {
 }>
 
 
-const part = RQuery.Path<guh>("Workspace\\*Part");
+const part = RQuery.UnreliablePath<guh>("Workspace\\*Part");
 
 
 // fully predicts "baby"
@@ -109,12 +109,16 @@ part?.WaitForChild("surface").FindFirstChild("img");
 ### Instance Management
 RQuery has a few tools for improving instance management in projects.
 
-First: `RQuery.Path` which lets you path to an instance through an extremely feature rich system including:
+First: `RQuery.Path` and `RQuery.UnreliablePath` which lets you path to an instance through an extremely feature rich system including:
 - shorthand names (`Shared\\`, `Server\\`, `Client\\`, `LocalPlayer\\`, `Character\\`, `Gui\\`)
 - unique names (`@name`)
 - yields (`*name`)
 - unique name yields (`*@name`)
 - relative (2nd argument)
+
+`RQuery.Path` always gives back `T` so it won't tell you where it can fail good for stuff you know exists on the server
+
+`RQuery.UnreliablePath` gives `T | undefined` and is useful on the client when you don't know if the instance exists
 
 ```ts
 RQuery.Path("Workspace\\Baseplate\\Texture");

@@ -1,18 +1,5 @@
-//#region Variables
 import Services from "@rbxts/services";
-
-type ServiceName = keyof typeof Services;
-type Stuff = "@" | "Client\\" | "Server\\" | "Shared\\" | "LocalPlayer\\" | "Character\\" | "Gui\\" | `${ServiceName}\\` | optionalString;
-
-type InstanceNames = Extract<keyof CreatableInstances, string>
-	type InstanceProperties<T> = Partial<
-		{ [K in keyof T]: T[K] } 
-		& 
-		{ Children?: Instance[], Attributes?: Record<string, AttributeValue> }
-	>
-
 const trim = (x: string): string => x.gsub("^%s+", "")[0].gsub("%s+$", "")[0]
-//#endregion
 
 
 namespace RQuery {
@@ -141,7 +128,29 @@ namespace RQuery {
 	 * RQuery.Path("*@Baseplate\\*Texture")
 	 * @returns given type or default {@link Instance}
 	 */
-	export const Path = <T extends Instance>(path: Stuff, parent: Instance = game, timeout = 5): T | undefined => {
+	export const Path = <T extends Instance>(path: Stuff, parent: Instance = game, timeout = 5): T => {
+		return UnreliablePath(path, parent, timeout) as T
+	}
+	//#endregion
+
+
+	//#region UnreliablePath()
+	/**
+	 * @param parent instance to get from
+	 * @example 
+	 * // path with each instance separated by "\\"
+	 * RQuery.UnreliablePath("Workspace\\Baseplate\\Texture");
+	 *  // using tags you can do unique names
+	 * RQuery.UnreliablePath("@Baseplate");
+	 * // using "*" makes it use WaitForChild() (it waits for Baseplate and Texture)
+	 * RQuery.UnreliablePath("Workspace\\*Baseplate\\*Texture");
+	 * // the 2nd argument lets you specify the parent to get from
+	 * RQuery.UnreliablePath("*Baseplate\\*Texture", Workspace);
+	 * // you can combine wait and unique name into "*@"
+	 * RQuery.UnreliablePath("*@Baseplate\\*Texture")
+	 * @returns given type or default {@link Instance}
+	 */
+	export const UnreliablePath = <T extends Instance>(path: Stuff, parent: Instance = game, timeout = 5): T | undefined => {
 		let guh: Instance | undefined = parent;
 		let isClient = Services.RunService.IsClient();
 
@@ -225,5 +234,20 @@ namespace RQuery {
 	}
 	//#endregion
 }
+
+//#region Types
+
+type ServiceName = keyof typeof Services;
+type Stuff = "@" | "Client\\" | "Server\\" | "Shared\\" | "LocalPlayer\\" | "Character\\" | "Gui\\" | `${ServiceName}\\` | optionalString;
+
+type InstanceNames = Extract<keyof CreatableInstances, string>
+	type InstanceProperties<T> = Partial<
+		{ [K in keyof T]: T[K] } 
+		& 
+		{ Children?: Instance[], Attributes?: Record<string, AttributeValue> }
+	>
+
+//#endregion
+
 
 export = RQuery;

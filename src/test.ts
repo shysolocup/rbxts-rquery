@@ -11,4 +11,4 @@ type guh = $<Part & {
     }
 }>
 
-const part = RQuery.Path<guh>("Workspace\\Part");
+const part = RQuery.Path("Workspace\\Part");
