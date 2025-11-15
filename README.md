@@ -10,6 +10,10 @@ it includes an RQuery namespace for instance creation and management as well as 
 
 RQuery combines the already existent methods of [indexing children](https://roblox-ts.com/docs/guides/indexing-children) in Roblox-TS and combines it with type overwrites to get better type prediction and it's <u>*NON-STRICT*</u> meaning you can still use it COMPLETELY normally without any RQuery stuff.
 
+it's this simple
+
+<img src="./assets/guh.PNG"/>
+
 <br>
 
 ---
