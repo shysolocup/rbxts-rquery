@@ -139,46 +139,32 @@ type $<Base extends RQueryBase> = {
 //#region Types
 
 /**
- * Creates a new RQuery instance
- * @example
- * const workspace = Workspace as $<Workspace & {
- *     $attributes: {
- *         guh: 5
- *     }
- *     Foo: Part & {
- *         Decal: Decal
- *     }
- * }>;
- * 
- * // fully compatible
- * // recursive descendants
- * workspace.FindFirstChild("Foo")?.WaitForChild("Decal")
- * 
- * // generic types (NO AS!!!)
- * workspace.FindFirstChild<Part>("Foo")
- * 
- * // attribute typechecking
- * workspace.GetAttribute
+ * preset for an RQuery
  */
 
 type RQueryBase = Instance & {
     $attributes?: Record<string, AttributeValue>
 }
 
+/**
+ * eval for if it should infer the child's type from `Base`'s properties or use the `As` type
+ */
 type iReturnEval<
-        T extends Instance, 
-        O extends RQueryBase | undefined = undefined, 
-        K extends ExtractKeys<T, Instance> = ExtractKeys<T, Instance>
+        Base extends Instance, 
+        As extends RQueryBase | undefined = undefined, 
+        Children extends ExtractKeys<Base, Instance> = ExtractKeys<Base, Instance>
     > = 
     // if o isn't given it defaults to the children
-    O extends $<RQueryBase> ? O
-    : O extends Instance ? $<O>
-    : T[K] extends $<RQueryBase> ? T[K]
-        : T[K] extends RQueryBase ? $<T[K]>
+    As extends $<RQueryBase> ? As
+    : As extends Instance ? $<As>
+    : Base[Children] extends $<RQueryBase> ? Base[Children]
+        : Base[Children] extends RQueryBase ? $<Base[Children]>
         : Instance
 
 
-
+/**
+ * just an easy way to make it nonstrict, you're welcome
+ */
 type optionalString = (string & {});
 
 //#endregion

@@ -9,7 +9,7 @@ a hub for RQuery development information, most things will appear here.. eventua
 ### Installations
 > the stable release versions are published on npm:
 > ```console
-> npm i @rbxts/rquery
+> npm i rbxts-rquery
 > ```
 
 > dev versions with experimental features are here on github:
