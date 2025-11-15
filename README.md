@@ -2,17 +2,17 @@
 ---
 
 # RQuery
-A small feature-rich Roblox-TS utility package for more helpful types and simpler management of instances, properties, and attributes.
+A small feature-rich Roblox-TS package for more helpful types and simpler management of instances, properties, and attributes.
 
 Obviously inspired in some part by [jQuery](https://jquery.com/).
 
 it includes an RQuery namespace for instance creation and management as well as a ton of method overrides under the `$<BaseType>` type.
 
-RQuery combines the already existent methods of [indexing children](https://roblox-ts.com/docs/guides/indexing-children) in Roblox-TS and combines it with type overwrites to get better type prediction and it's <u>*NON-STRICT*</u> meaning you can still use it COMPLETELY normally without any RQuery stuff.
-
 it's this simple
 
 <img src="./assets/guh.PNG"/>
+
+RQuery combines the already existent methods of [indexing children](https://roblox-ts.com/docs/guides/indexing-children) in Roblox-TS and combines it with type overwrites to get better type prediction and it's <u>*NON-STRICT*</u> meaning you can still use it COMPLETELY normally without any RQuery stuff.
 
 <br>
 
