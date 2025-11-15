@@ -3,6 +3,51 @@
 
 <img src="./assets/RQuery.png" style="width:500px" />
 
+<a 
+    href="https://www.npmjs.com/package/@rbxts/rquery">
+    <img 
+        height=22 
+        src="https://img.shields.io/npm/v/@rbxts/rquery?style=flat&color=red&logo=npm&logoColor=white" 
+        alt="version" 
+    />
+</a>
+<a 
+    href="https://www.npmjs.com/package/@rbxts/rquery">
+    <img 
+        height=22 
+        src="https://img.shields.io/npm/dt/rbxts?style=flat&color=green&logo=docusign&logoColor=white" 
+        alt="downloads" 
+    />
+</a>
+<a href="https://www.npmjs.com/package/discord.js">
+    <img 
+        height=22 
+        src="https://img.shields.io/badge/Powered by-Roblox TS-red?style=flat&color=E1182F&logo=roblox&logoColor=E1182F" 
+        alt="discord.js" 
+    />
+</a>
+<a 
+    href="https://github.com/shysolocup/rbxts-rquery/wiki">
+    <img 
+        height=22 
+        src="https://img.shields.io/badge/documentation-blue?style=flat&color=black&logo=github&logoColor=white" 
+        alt="documentation" 
+    />
+</a>
+<img 
+    height=22 
+    src="https://github.com/shysolocup/rbxts-rquery/actions/workflows/publish-shit.yml/badge.svg" 
+    alt="publish"
+/>
+
+<br>
+
+
+⚠️ __PLEASE NOTE:__
+this package is currently in active development and is far from finished ⚠️ 
+
+<br>
+
 A small feature-rich Roblox-TS package for more helpful types and simpler management of instances, properties, and attributes.
 
 Obviously inspired in some part by [jQuery](https://jquery.com/).
@@ -10,6 +55,10 @@ Obviously inspired in some part by [jQuery](https://jquery.com/).
 It includes an RQuery namespace for instance creation and management as well as a ton of method overrides under the `$<BaseType>` type.
 
 It's this simple
+
+```console
+npm i @rbxts/rquery
+```
 
 <img src="./assets/guh.PNG"/>
 
@@ -45,6 +94,8 @@ part?.FindFirstChild("baby")
 // fully predicts "surface" and predicts img
 part?.WaitForChild("surface").FindFirstChild("img");
 ```
+
+<br>
 
 ---
 
@@ -106,5 +157,40 @@ const params = RQuery.New(RaycastParams, {
 })
 ```
 
+<br>
 
 ---
+
+
+## Collaborators
+
+<table>
+    
+  <tr>
+    <td align="center">
+        <a href="https://github.com/shysolocup">
+                <img 
+                    src="https://avatars.githubusercontent.com/u/88659700?v=4?s=100" 
+                    width="100px;" 
+                    alt="me"
+                />
+                <br/>
+                <sub><b>shysolocup</b></sub>
+            </a>
+        <br/>
+    </td>
+</tr>
+    
+      
+</table>
+
+<br>
+
+---
+
+<br>
+
+## Disclaimer
+this package and the developers behind it are not associated with Roblox, Roblox-TS, or jQuery
+
+<br><br>
