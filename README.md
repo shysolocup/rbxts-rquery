@@ -1,7 +1,8 @@
 
 ---
 
-# RQuery
+<img src="./assets/RQuery.png" style="width:500px" />
+
 A small feature-rich Roblox-TS package for more helpful types and simpler management of instances, properties, and attributes.
 
 Obviously inspired in some part by [jQuery](https://jquery.com/).
