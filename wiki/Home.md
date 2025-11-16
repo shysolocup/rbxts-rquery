@@ -1,11 +1,8 @@
-<a
-    href="https://www.npmjs.com/package/@rbxts/rquery">
-    <img 
-        src="../assets/RQuerydocs.png" 
-        alt="logo"
-        style="width:500px"
-    />
-</a>
+<img 
+    src="../assets/RQuerydocs.png" 
+    alt="logo"
+    style="width:500px"
+/>
 
 <img 
     height=22 
