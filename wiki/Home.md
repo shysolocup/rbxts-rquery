@@ -1,5 +1,5 @@
 <img 
-    src="./assets/RQuerydocs.png" 
+    src="https://raw.githubusercontent.com/shysolocup/rbxts-rquery/refs/heads/main/assets/RQuerydocs.png" 
     alt="logo"
     style="width:500px"
 />
