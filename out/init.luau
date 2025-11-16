@@ -4,6 +4,11 @@ local Services = TS.import(script, TS.getModule(script, "@rbxts", "services"))
 local trim = function(x)
 	return (string.gsub((string.gsub(x, "^%s+", "")), "%s+$", ""))
 end
+--[[
+	*
+	 * Creates a new `Instance` type query
+	 
+]]
 local RQuery = {}
 do
 	local _container = RQuery
@@ -12,11 +17,6 @@ do
 		return parent[key]
 	end
 	_container.Set = Set
-	--[[
-		*
-			 * Creates a new `Instance` type query
-			 
-	]]
 	--#region New()
 	--[[
 		*
@@ -288,6 +288,11 @@ end
 --#region Types
 --[[
 	*
+	 * preset for an RQuery
+	 
+]]
+--[[
+	*
 	 * eval for if it should infer the child's type from `Base`'s properties or use the `As` type
 	 
 ]]
@@ -297,4 +302,6 @@ end
 	 
 ]]
 --#endregion
-return RQuery
+return {
+	RQuery = RQuery,
+}

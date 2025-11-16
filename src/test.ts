@@ -1,4 +1,4 @@
-import RQuery from ".";
+import { $, RQuery } from ".";
 
 type guh = $<Part & {
     $attributes: {
