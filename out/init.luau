@@ -12,6 +12,11 @@ do
 		return parent[key]
 	end
 	_container.Set = Set
+	--[[
+		*
+			 * Creates a new `Instance` type query
+			 
+	]]
 	--#region New()
 	--[[
 		*
@@ -281,5 +286,15 @@ do
 	--#endregion
 end
 --#region Types
+--[[
+	*
+	 * eval for if it should infer the child's type from `Base`'s properties or use the `As` type
+	 
+]]
+--[[
+	*
+	 * just an easy way to make it nonstrict, you're welcome
+	 
+]]
 --#endregion
 return RQuery
