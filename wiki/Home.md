@@ -1,6 +1,17 @@
-# [RQuery Docs](https://youtu.be/dQw4w9WgXcQ)
+<a
+    href="https://www.npmjs.com/package/@rbxts/rquery">
+    <img 
+        src="../assets/RQuerydocs.png" 
+        alt="logo"
+        style="width:500px"
+    />
+</a>
 
-<img height=22 src="https://github.com/shysolocup/rbxts-rquery/actions/workflows/publish-wiki.yml/badge.svg" alt="wiki publish">
+<img 
+    height=22 
+    src="https://github.com/shysolocup/rbxts-rquery/actions/workflows/publish-wiki.yml/badge.svg" 
+    alt="wiki publish"
+/>
 
 <br>
 
@@ -16,9 +27,5 @@ a hub for RQuery development information, most things will appear here.. eventua
 > ```console
 > npm i shysolocup/rbxts-rquery
 > ```
-
-<br>
-
-### [Guides](https://github.com/revameg/noscord.js/wiki/Guides)
 
 <br>
