@@ -2,7 +2,7 @@
 ---
 
 <a
-    href="https://www.npmjs.com/package/rbxts-rquery">
+    href="https://www.npmjs.com/package/@rbxts/rquery">
     <img 
         src="./assets/RQuery.png" 
         alt="logo"
@@ -11,18 +11,18 @@
 </a>
 
 <a 
-    href="https://www.npmjs.com/package/rbxts-rquery">
+    href="https://www.npmjs.com/package/@rbxts/rquery">
     <img 
         height=22 
-        src="https://img.shields.io/npm/v/rbxts-rquery?style=flat&color=red&logo=npm&logoColor=white" 
+        src="https://img.shields.io/npm/v/@rbxts/rquery?style=flat&color=red&logo=npm&logoColor=white" 
         alt="version" 
     />
 </a>
 <a 
-    href="https://www.npmjs.com/package/rbxts-rquery">
+    href="https://www.npmjs.com/package/@rbxts/rquery">
     <img 
         height=22 
-        src="https://img.shields.io/npm/dt/rbxts-rquery?style=flat&color=green&logo=docusign&logoColor=white" 
+        src="https://img.shields.io/npm/dt/@rbxts/rquery?style=flat&color=green&logo=docusign&logoColor=white" 
         alt="downloads" 
     />
 </a>
@@ -64,7 +64,7 @@ It includes an RQuery namespace for instance creation and management as well as 
 It's this simple
 
 ```console
-npm i rbxts-rquery
+npm i @rbxts/rquery
 ```
 
 <img src="./assets/guh.PNG"/>

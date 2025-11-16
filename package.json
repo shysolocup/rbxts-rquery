@@ -1,5 +1,5 @@
 {
-  "name": "rbxts-rquery",
+  "name": "@rbxts/rquery",
   "version": "1.0.4",
   "description": "A small feature-rich Roblox-TS utility package for more helpful types and simpler management of instances, properties, and attributes.",
   "main": "out/init.lua",
@@ -22,7 +22,7 @@
     "ts",
     "typescript"
   ],
-  "author": "",
+  "author": "shysolocup",
   "license": "MIT",
   "type": "commonjs",
   "bugs": {
@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/shysolocup/rbxts-rquery#readme",
   "types": "out/index.d.ts",
+  "typings": "out/index.d.ts",
   "files": [
     "out",
     "!**/*.tsbuildinfo"
