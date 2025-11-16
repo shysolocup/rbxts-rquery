@@ -102,6 +102,23 @@ part?.FindFirstChild("baby")
 part?.WaitForChild("surface").FindFirstChild("img");
 ```
 
+it also, as said previously, works without using anything from RQuery but the types
+
+```ts
+type guh = $<Part & {
+    baby: Decal,
+    surface: SurfaceGui & {
+        img: ImageLabel
+    }
+}>
+
+const part = Workspace.WaitForChild("Part") as guh;
+
+// also gives full types
+part.WaitForChild("surface").FindFirstChild("img")
+
+```
+
 <br>
 
 ---
