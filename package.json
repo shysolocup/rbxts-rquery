@@ -12,9 +12,18 @@
     "type": "git",
     "url": "https://github.com/shysolocup/rbxts-rquery"
   },
-  "keywords": [],
-  "author": "shysolocup",
-  "license": "ISC",
+  "keywords": [
+    "rbxts",
+    "roblox-ts",
+    "roblox",
+    "rbx",
+    "rblx",
+    "game",
+    "ts",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/shysolocup/rbxts-rquery/issues"
