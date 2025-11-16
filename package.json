@@ -1,6 +1,6 @@
 {
   "name": "rbxts-rquery",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A small feature-rich Roblox-TS utility package for more helpful types and simpler management of instances, properties, and attributes.",
   "main": "out/init.lua",
   "scripts": {
