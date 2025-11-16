@@ -1,5 +1,5 @@
 <img 
-    src="../assets/RQuerydocs.png" 
+    src="./assets/RQuerydocs.png" 
     alt="logo"
     style="width:500px"
 />
