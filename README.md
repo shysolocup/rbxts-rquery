@@ -102,7 +102,30 @@ part?.FindFirstChild("baby")
 part?.WaitForChild("surface").FindFirstChild("img");
 ```
 
-it also, as said previously, works without using anything from RQuery but the types
+you can also use it to define attributes and tags
+
+```ts
+type guh = $<Part & {
+    baby: Decal,
+    surface: SurfaceGui & {
+        img: ImageLabel
+    },
+    $attributes: {
+        guh: 5
+    },
+    $tags: [
+        "CoolPart"
+    ]
+}>
+
+const part = RQuery.UnreliablePath<guh>("Workspace\\*Part");
+
+part?.GetAttribute("guh");
+
+part?.HasTag("CoolPart");
+```
+
+and, as said previously, works without using anything from RQuery but the types
 
 ```ts
 type guh = $<Part & {
@@ -162,6 +185,10 @@ const part = RQuery.Instantiate("Part", {
         guh: 1,
         AGHH: "buh"
     },
+
+    "Tags": [
+        "AwesomePart"
+    ]
 
     "Children": [
         RQuery.Instantiate("Decal", {
