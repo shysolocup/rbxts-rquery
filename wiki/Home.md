@@ -1,3 +1,7 @@
+<table><tr><td>
+
+<br>
+
 <img 
     src="https://raw.githubusercontent.com/shysolocup/rbxts-rquery/refs/heads/main/assets/RQuerydocs.png" 
     alt="logo"
@@ -26,3 +30,5 @@ a hub for RQuery development information, most things will appear here.. eventua
 > ```
 
 <br>
+
+</td></tr></table>
