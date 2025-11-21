@@ -18,7 +18,7 @@ type Character = $<Model & {
     Torso: Part
 }>
 
-const character = player.Character as me;
+const character = player.Character as Character;
 ```
 
 or using named types and interfaces
