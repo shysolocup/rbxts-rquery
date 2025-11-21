@@ -85,6 +85,7 @@ declare global {
      *          guh: 5
      *      },
      *      $tags: [
+	 * 			"AwesomePart"
      *      ]
      * }>
      */ 
@@ -222,10 +223,13 @@ type RQueryFactory<Base extends RQueryBase> = {
 	
 	GetAttribute: <
 		As extends RQueryBase | undefined = undefined, 
-		Attributes extends keyof Base["$attributes"] = never,
+		Attributes extends 
+			(keyof RQueryAttributes) 
+			| keyof Base["$attributes"] 
+			= never,
 	>(
 		attribute: Attributes | nonStrictString
-	) => As extends AttributeValue ? As : Base["$attributes"][Attributes]
+	) => As extends AttributeValue ? As : (RQueryAttributes & Base["$attributes"])[Attributes]
 	
 	//#endregion
 
@@ -245,7 +249,7 @@ type RQueryFactory<Base extends RQueryBase> = {
 	
 	GetAttributes: <
 		As extends RQueryBase | undefined = undefined,
-	>() => As extends AttributeValue ? As : Base["$attributes"] & { [key: string]: AttributeValue }
+	>() => As extends AttributeValue ? As : Base["$attributes"] & RQueryAttributes & { [key: string]: AttributeValue }
 	
 	//#endregion
 
@@ -265,10 +269,13 @@ type RQueryFactory<Base extends RQueryBase> = {
 	
 	SetAttribute: <
 		As extends RQueryBase | undefined = undefined, 
-		Attributes extends keyof Base["$attributes"] = never,
+		Attributes extends 
+			(keyof RQueryAttributes) 
+			| keyof Base["$attributes"] 
+			= never,
 	>(
 		attribute: Attributes | nonStrictString,
-		value: As extends AttributeValue ? As : Base["$attributes"][Attributes]
+		value: As extends AttributeValue ? As : (Base["$attributes"] & RQueryAttributes)[Attributes]
 	) => void
 
 	//#endregion

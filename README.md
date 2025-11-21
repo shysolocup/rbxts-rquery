@@ -142,6 +142,20 @@ part.WaitForChild("surface").FindFirstChild("img")
 
 ```
 
+also, you can overwrite the base tags and attributes like indexing children normally
+
+```ts
+// yourproject/src/rquery.d.ts
+
+interface RQueryTags extends RQueryTagsBase {
+    guh: true
+}
+
+interface RQueryAttributes {
+    burger: 1
+}
+```
+
 <br>
 
 ---
