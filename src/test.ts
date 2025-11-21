@@ -1,4 +1,4 @@
-import { $, RQuery } from ".";
+import { RQuery } from ".";
 
 type guh = $<Part & {
     $attributes: {
@@ -11,4 +11,4 @@ type guh = $<Part & {
     }
 }>
 
-const part = RQuery.Path("Workspace\\Part");
+const part = RQuery.Path<guh>("Workspace\\Part");

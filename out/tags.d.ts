@@ -1,1 +1,0 @@
-declare enum RQueryTags {}

@@ -1,14 +1,29 @@
 -- Compiled with roblox-ts v3.0.0
 local TS = _G[script]
+--[[
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////
+	 _______    ______                                          
+	|       \  /      \                                         
+	| $$$$$$$\|  $$$$$$\ __    __   ______    ______   __    __ 
+	| $$__| $$| $$  | $$|  \  |  \ /      \  /      \ |  \  |  \
+	| $$    $$| $$  | $$| $$  | $$|  $$$$$$\|  $$$$$$\| $$  | $$
+	| $$$$$$$\| $$ _| $$| $$  | $$| $$    $$| $$   \$$| $$  | $$
+	| $$  | $$| $$/ \ $$| $$__/ $$| $$$$$$$$| $$      | $$__/ $$
+	| $$  | $$ \$$ $$ $$ \$$    $$ \$$     \| $$       \$$    $$
+	 \$$   \$$  \$$$$$$\  \$$$$$$   \$$$$$$$ \$$       _\$$$$$$$
+	                \$$$                              |  \__| $$
+	                                                   \$$    $$
+	                                                    \$$$$$$ 
+	by shysolocup
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////
+	
+]]
 local Services = TS.import(script, TS.getModule(script, "@rbxts", "services"))
 local trim = function(x)
 	return (string.gsub((string.gsub(x, "^%s+", "")), "%s+$", ""))
 end
---[[
-	*
-	 * Creates a new `Instance` type query
-	 
-]]
 local RQuery = {}
 do
 	local _container = RQuery
@@ -97,6 +112,16 @@ do
 				for att_k, att_v in pairs(v) do
 					inst:SetAttribute(att_k, att_v)
 				end
+			end
+			if k == "Tags" then
+				-- ▼ ReadonlyArray.forEach ▼
+				local _callback = function(t)
+					return inst:AddTag(t)
+				end
+				for _k, _v in v do
+					_callback(_v, _k - 1, v)
+				end
+				-- ▲ ReadonlyArray.forEach ▲
 			end
 			if k == "Children" then
 				-- ▼ ReadonlyArray.forEach ▼
@@ -204,7 +229,7 @@ do
 				end
 			end
 			-- *@name is a unique name wait for child
-			if (string.match(fix, "^\*@")) ~= nil then
+			if (string.match(fix, "^%*@")) ~= nil then
 				local name = string.sub(fix, 3)
 				local erug
 				local elapsed = 0
@@ -285,22 +310,7 @@ do
 	_container.UnreliablePath = UnreliablePath
 	--#endregion
 end
---#region Types
---[[
-	*
-	 * preset for an RQuery
-	 
-]]
---[[
-	*
-	 * eval for if it should infer the child's type from `Base`'s properties or use the `As` type
-	 
-]]
---[[
-	*
-	 * just an easy way to make it nonstrict, you're welcome
-	 
-]]
+--#region Helper Types
 --#endregion
 return {
 	RQuery = RQuery,
