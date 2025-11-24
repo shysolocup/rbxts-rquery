@@ -142,7 +142,12 @@ part.WaitForChild("surface").FindFirstChild("img")
 
 ```
 
-also, you can overwrite the base tags and attributes like indexing children normally
+<br>
+
+---
+
+### Attributes and Tags
+you can overwrite the default tags and attributes like indexing children normally
 
 ```ts
 // yourproject/src/rquery.d.ts
@@ -154,6 +159,39 @@ interface RQueryTags extends RQueryDefaultTags {
 interface RQueryAttributes {
     burger: 1
 }
+```
+
+using this you can also define tag attributes
+
+```ts
+// yourproject/src/rquery.d.ts
+declare global {
+    interface RQueryTags extends RQueryDefaultTags {
+        CreatureSpawner: {
+            // note: RQuery also comes with the NonstrictString type you can use
+            Groups?: keyof typeof CreatureGroups | NonstrictString
+            Items?: keyof typeof CreatureList | NonstrictString
+        }
+    }
+}
+```
+```ts
+type guh =  $<Part & {
+    $tags: [
+        "CreatureSpawner"
+    ],
+    $attributes: {
+        AAGHH: 5
+    }
+}> 
+
+const part = RQuery.UnreliablePath<guh>("Workspace\\*Part");
+
+// fully typed tells you attributes you can get
+const items = part?.GetAttribute("Items")
+
+// also fully predicted but nonstrict
+if (items === "Glup") {}
 ```
 
 <br>

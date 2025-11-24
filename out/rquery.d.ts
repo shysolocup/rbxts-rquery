@@ -50,7 +50,7 @@ declare global {
 	 * 		// do other stuff
 	 * }
 	 */
-	type NonStrictString = (string & {});
+	type NonstrictString = (string & {});
 
     //#region Tags
 
@@ -127,7 +127,7 @@ declare global {
 
     type RQueryBase = Instance & {
         $attributes?: Record<string, AttributeValue>,
-        $tags?: ((keyof RQueryTags) | NonStrictString)[]
+        $tags?: ((keyof RQueryTags) | NonstrictString)[]
     }
     
     //#endregion  
@@ -187,7 +187,7 @@ type RQueryFactory<Base extends RQueryBase> = {
 		Child extends ExtractKeys<Base, Instance> = never
 	>(
 		this: Base,
-		childName: Child | NonStrictString | number,
+		childName: Child | NonstrictString | number,
 		timeOut?: number
 	): iReturnEval<Base, As, Child>
 
@@ -213,7 +213,7 @@ type RQueryFactory<Base extends RQueryBase> = {
 		Child extends ExtractKeys<Base, Instance> = never,
 	>(
 		this: Base,
-		name: Child | NonStrictString | number
+		name: Child | NonstrictString | number
 	): iReturnEval<Base, As, Child> | undefined
 	
 	//#endregion
@@ -255,16 +255,21 @@ type RQueryFactory<Base extends RQueryBase> = {
 		As extends RQueryBase | undefined = undefined,
 		Attributes extends
 			keyof RQueryAttributes
-			| keyof Base["$attributes"]
-			| keyof TagAttributes<Base>
+				| keyof Base["$attributes"]
+				| keyof TagAttributes<Base>
 			= never
 	>(
 		this: Base,
-		attribute: Attributes | NonStrictString
+		attribute: Attributes | NonstrictString
 	): 
 		As extends AttributeValue
     		? As
-    		: (RQueryAttributes & Base["$attributes"] & TagAttributes<Base>)[Attributes] | undefined;
+    		: (
+				Base["$attributes"]
+					& TagAttributes<Base>
+					& RQueryAttributes
+			)[Attributes] 
+				| undefined;
 	
 	//#endregion
 
@@ -289,7 +294,7 @@ type RQueryFactory<Base extends RQueryBase> = {
 	): 
 		As extends AttributeValue 
 			? As 
-			: ["$attributes"] 
+			: Base["$attributes"] 
 				& RQueryAttributes 
 				& TagAttributes<Base> 
 				& { 
@@ -316,18 +321,18 @@ type RQueryFactory<Base extends RQueryBase> = {
 		As extends RQueryBase | undefined = undefined, 
 		Attributes extends
 			keyof RQueryAttributes
-			| keyof Base["$attributes"]
-			| keyof TagAttributes<Base>
+				| keyof Base["$attributes"]
+				| keyof TagAttributes<Base>
 			= never
 	>(
 		this: Base,
-		attribute: Attributes | NonStrictString,
+		attribute: Attributes | NonstrictString,
 		value: As extends AttributeValue 
 			? As 
 			: (
-				Base["$attributes"] 
-				& TagAttributes<Base> 
-				& RQueryAttributes
+				Base["$attributes"]
+					& TagAttributes<Base>
+					& RQueryAttributes
 			)[Attributes]
 	): void
 
@@ -352,7 +357,7 @@ type RQueryFactory<Base extends RQueryBase> = {
             = never,
 	>(
 		this: Base,
-		tag: Tags | NonStrictString,
+		tag: Tags | NonstrictString,
 	): boolean
 
 	//#endregion

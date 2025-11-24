@@ -81,7 +81,7 @@ export declare namespace RQuery {
     const UnreliablePath: <T extends Instance>(path: RQueryDirectory, parent?: Instance, timeout?: number) => T | undefined;
 }
 type ServiceName = keyof typeof Services;
-export type RQueryDirectory = "@" | "Client\\" | "Server\\" | "Shared\\" | "LocalPlayer\\" | "Character\\" | "Gui\\" | `${ServiceName}\\` | NonStrictString;
+export type RQueryDirectory = "@" | "Client\\" | "Server\\" | "Shared\\" | "LocalPlayer\\" | "Character\\" | "Gui\\" | `${ServiceName}\\` | NonstrictString;
 type InstanceNames = Extract<keyof CreatableInstances, string>;
 export type RQueryInstanceProperties<T> = Partial<{
     [K in keyof T]: T[K];
