@@ -82,7 +82,7 @@ export namespace RQuery {
     export const Instantiate = <
 		InstanceName extends InstanceNames = InstanceNames,
 		T extends CreatableInstances[InstanceName] = CreatableInstances[InstanceName],
-		Properties extends InstanceProperties<T> = InstanceProperties<T>,
+		Properties extends RQueryInstanceProperties<T> = RQueryInstanceProperties<T>,
 		Return = $<
 			T & {
 				"$attributes": Properties["Attributes"]
@@ -110,7 +110,7 @@ export namespace RQuery {
      * @param properties properties of {@link inst}
      * @returns the {@link inst} but cooler
      */
-    export const Propertize = <T extends Instance>(inst: T, properties: InstanceProperties<T>): T => {
+    export const Propertize = <T extends Instance>(inst: T, properties: RQueryInstanceProperties<T>): T => {
 		for (let [k, v] of pairs(properties)) {
 			if (k === "Attributes") {
 				for (let [att_k, att_v] of pairs(v as Record<string, AttributeValue>)) {
@@ -153,7 +153,7 @@ export namespace RQuery {
 	 * RQuery.Path("*@Baseplate\\*Texture")
 	 * @returns given type or default {@link Instance}
 	 */
-	export const Path = <T extends Instance>(path: Stuff, parent: Instance = game, timeout = 5): T => {
+	export const Path = <T extends Instance>(path: RQueryDirectory, parent: Instance = game, timeout = 5): T => {
 		return UnreliablePath(path, parent, timeout) as T
 	}
 	//#endregion
@@ -175,7 +175,7 @@ export namespace RQuery {
 	 * RQuery.UnreliablePath("*@Baseplate\\*Texture")
 	 * @returns given type or default {@link Instance}
 	 */
-	export const UnreliablePath = <T extends Instance>(path: Stuff, parent: Instance = game, timeout = 5): T | undefined => {
+	export const UnreliablePath = <T extends Instance>(path: RQueryDirectory, parent: Instance = game, timeout = 5): T | undefined => {
 		let guh: Instance | undefined = parent;
 		let isClient = Services.RunService.IsClient();
 
@@ -265,13 +265,13 @@ export namespace RQuery {
 type nonStrictString = (string & {});
 
 type ServiceName = keyof typeof Services;
-type Stuff = "@" | "Client\\" | "Server\\" | "Shared\\" | "LocalPlayer\\" | "Character\\" | "Gui\\" | `${ServiceName}\\` | nonStrictString;
+export type RQueryDirectory = "@" | "Client\\" | "Server\\" | "Shared\\" | "LocalPlayer\\" | "Character\\" | "Gui\\" | `${ServiceName}\\` | nonStrictString;
 
 type InstanceNames = Extract<keyof CreatableInstances, string>
-	type InstanceProperties<T> = Partial<
-		{ [K in keyof T]: T[K] } 
-		& 
-		{ Children?: Instance[], Attributes?: Record<string, AttributeValue> }
-	>
+export type RQueryInstanceProperties<T> = Partial<
+	{ [K in keyof T]: T[K] } 
+	& 
+	{ Children?: Instance[], Attributes?: Record<string, AttributeValue> }
+>
 
 //#endregion
