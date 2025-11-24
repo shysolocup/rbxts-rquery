@@ -34,7 +34,7 @@ declare global {
 	 * @example
 	 * type guhType = $<Part & {
 	 * 		$attributes: {
-	 * 			value: "guh" | "buh" | NonStrictString
+	 * 			value: "guh" | "buh" | NonstrictString
 	 * 		}
 	 * }>
 	 * 
