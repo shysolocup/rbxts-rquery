@@ -18,11 +18,39 @@ by shysolocup
 */                                                    
 
 
+/**
+ * shortens the hover text of {@link RQueryFactory}
+ * 
+ * that is literally all this does
+ */
 declare const shortener: unique symbol;
 
 
 // global exporter
 declare global {
+
+	/**
+	 * a small nonstrict string addon to allow u to unlock stuff and still get intellisense
+	 * @example
+	 * type guhType = $<Part & {
+	 * 		$attributes: {
+	 * 			value: "guh" | "buh" | NonStrictString
+	 * 		}
+	 * }>
+	 * 
+	 * const guh = RQuery.Path<guhType>("Workspace\\*Part");
+	 * const value = guh.GetAttribute("value")
+	 * 
+	 * // still gets full intellisense
+	 * if (value === "guh") {
+	 * 		// do stuff
+	 * }
+	 * // if it was strict it would error here
+	 * else if (value === "AGGHHH") {
+	 * 		// do other stuff
+	 * }
+	 */
+	type NonStrictString = (string & {});
 
     //#region Tags
 
@@ -99,7 +127,7 @@ declare global {
 
     type RQueryBase = Instance & {
         $attributes?: Record<string, AttributeValue>,
-        $tags?: ((keyof RQueryDefaultTags) | nonStrictString)[]
+        $tags?: ((keyof RQueryTags) | NonStrictString)[]
     }
     
     //#endregion  
@@ -114,21 +142,21 @@ export * from "./index";
  */
 type RQueryFactory<Base extends RQueryBase> = {
     
-    [shortener]: never
+    readonly [shortener]: never
 
 	/**
 	 * Base given in creating the query eg: `$<Base>`
 	 * 
 	 * *This is types only if you try to use it in your code it won't work*
 	 */
-	$base: Base
+	readonly $base: Base
 
 	/**
 	 * Dictionary of given attributes
 	 * 
 	 * *This is types only if you try to use it in your code it won't work*
 	 */
-	$attributes: Record<string, AttributeValue>
+	readonly $attributes: Record<string, AttributeValue>
 
 
     /**
@@ -136,7 +164,7 @@ type RQueryFactory<Base extends RQueryBase> = {
 	 * 
 	 * *This is types only if you try to use it in your code it won't work*
 	 */
-	$tags: string[]
+	readonly $tags: string[]
 
 
 
@@ -154,13 +182,14 @@ type RQueryFactory<Base extends RQueryBase> = {
 	 * @returns The `Instance` found.
 	 */
 	
-	WaitForChild: <
+	WaitForChild<
 		As extends RQueryBase | undefined = undefined, 
 		Child extends ExtractKeys<Base, Instance> = never
 	>(
-		childName: Child | nonStrictString | number,
+		this: Base,
+		childName: Child | NonStrictString | number,
 		timeOut?: number
-	) => iReturnEval<Base, As, Child>
+	): iReturnEval<Base, As, Child>
 
 	//#endregion
 
@@ -179,12 +208,13 @@ type RQueryFactory<Base extends RQueryBase> = {
 	 * @returns The `Instance` found.
 	 */
 	
-	FindFirstChild: <
+	FindFirstChild<
 		As extends RQueryBase | undefined = undefined, 
 		Child extends ExtractKeys<Base, Instance> = never,
 	>(
-		childName: Child | nonStrictString | number
-	) => iReturnEval<Base, As, Child> | undefined
+		this: Base,
+		name: Child | NonStrictString | number
+	): iReturnEval<Base, As, Child> | undefined
 	
 	//#endregion
 
@@ -200,10 +230,10 @@ type RQueryFactory<Base extends RQueryBase> = {
      * @returns An array containing the instance's children.
      */
 
-	GetChildren: <
+	GetChildren<
 		Children = ExtractMembers<Base, Instance> & ExtractMembers<Base, $<Instance>>,
-	>() => 
-        Children[keyof Children][]
+	>(this: Base): 
+        (Children[keyof Children] | Instance)[]
 	
 	//#endregion
 
@@ -221,15 +251,20 @@ type RQueryFactory<Base extends RQueryBase> = {
 	 * @returns The value which has been assigned to the given attribute name. If no attribute has been assigned, `nil` is returned.
 	 */
 	
-	GetAttribute: <
-		As extends RQueryBase | undefined = undefined, 
-		Attributes extends 
-			(keyof RQueryAttributes) 
-			| keyof Base["$attributes"] 
-			= never,
+	GetAttribute<
+		As extends RQueryBase | undefined = undefined,
+		Attributes extends
+			keyof RQueryAttributes
+			| keyof Base["$attributes"]
+			| keyof TagAttributes<Base>
+			= never
 	>(
-		attribute: Attributes | nonStrictString
-	) => As extends AttributeValue ? As : (RQueryAttributes & Base["$attributes"])[Attributes]
+		this: Base,
+		attribute: Attributes | NonStrictString
+	): 
+		As extends AttributeValue
+    		? As
+    		: (RQueryAttributes & Base["$attributes"] & TagAttributes<Base>)[Attributes] | undefined;
 	
 	//#endregion
 
@@ -237,19 +272,29 @@ type RQueryFactory<Base extends RQueryBase> = {
 
 	//#region GetAttributes
 	/**
-	 * Returns the value which has been assigned to the given attribute name.
-	 *
-	 * - **ThreadSafety**: Safe
-	 *
-	 * [Creator Hub](https://create.roblox.com/docs/reference/engine/classes/Instance#GetAttribute)
-	 * @param this `Instance` is the base class for all classes in the Roblox class hierarchy which can be part of the `DataModel` tree.
-	 * @param attribute The name of the attribute being retrieved.
-	 * @returns The value which has been assigned to the given attribute name. If no attribute has been assigned, `nil` is returned.
-	 */
+     * Returns a dictionary of the instance's attributes.
+     *
+     * - **ThreadSafety**: Safe
+     * - **Tags**: CustomLuaState
+     *
+     * [Creator Hub](https://create.roblox.com/docs/reference/engine/classes/Instance#GetAttributes)
+     * @param this `Instance` is the base class for all classes in the Roblox class hierarchy which can be part of the `DataModel` tree.
+     * @returns A dictionary of string → variant pairs for each attribute where the string is the name of the attribute and the variant is a non-nil value.
+     */
 	
-	GetAttributes: <
+	GetAttributes<
 		As extends RQueryBase | undefined = undefined,
-	>() => As extends AttributeValue ? As : Base["$attributes"] & RQueryAttributes & { [key: string]: AttributeValue }
+	>(
+		this: Base
+	): 
+		As extends AttributeValue 
+			? As 
+			: ["$attributes"] 
+				& RQueryAttributes 
+				& TagAttributes<Base> 
+				& { 
+					[key: string]: AttributeValue | undefined 
+				}
 	
 	//#endregion
 
@@ -267,16 +312,24 @@ type RQueryFactory<Base extends RQueryBase> = {
 	 * @param value The value to set the specified attribute to.
 	 */
 	
-	SetAttribute: <
+	SetAttribute<
 		As extends RQueryBase | undefined = undefined, 
-		Attributes extends 
-			(keyof RQueryAttributes) 
-			| keyof Base["$attributes"] 
-			= never,
+		Attributes extends
+			keyof RQueryAttributes
+			| keyof Base["$attributes"]
+			| keyof TagAttributes<Base>
+			= never
 	>(
-		attribute: Attributes | nonStrictString,
-		value: As extends AttributeValue ? As : (Base["$attributes"] & RQueryAttributes)[Attributes]
-	) => void
+		this: Base,
+		attribute: Attributes | NonStrictString,
+		value: As extends AttributeValue 
+			? As 
+			: (
+				Base["$attributes"] 
+				& TagAttributes<Base> 
+				& RQueryAttributes
+			)[Attributes]
+	): void
 
 	//#endregion
 
@@ -292,14 +345,15 @@ type RQueryFactory<Base extends RQueryBase> = {
      * @param tag
      */
 
-	HasTag: <
+	HasTag<
 		Tags extends 
             (keyof RQueryTags) 
             | Base["$tags"][keyof Base["$tags"]]
             = never,
 	>(
-		tag: Tags | nonStrictString,
-	) => boolean
+		this: Base,
+		tag: Tags | NonStrictString,
+	): boolean
 
 	//#endregion
 	
@@ -307,9 +361,20 @@ type RQueryFactory<Base extends RQueryBase> = {
 } & Base;
 
 
+
 //#region Helper Types
 
-type nonStrictString = (string & {});
+type TagKeys<Base extends RQueryBase> =
+    Base["$tags"] extends readonly (infer T)[]
+        ? T & keyof RQueryTags
+        : never;
+
+type TagAttributes<Base extends RQueryBase> =
+    TagKeys<Base> extends never
+        ? {}
+        : {
+            [K in TagKeys<Base>]: RQueryTags[K] extends object ? RQueryTags[K] : {}
+        }[TagKeys<Base>];
 
 /**
  * eval for if it should infer the child's type from `Base`'s properties or use the `As` type

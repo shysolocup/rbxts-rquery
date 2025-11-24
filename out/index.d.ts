@@ -34,7 +34,7 @@ export declare namespace RQuery {
      * 		]
      * })
      */
-    const Instantiate: <InstanceName extends InstanceNames = InstanceNames, T extends CreatableInstances[InstanceName] = CreatableInstances[InstanceName], Properties extends InstanceProperties<T> = Partial<{ [K in keyof T]: T[K]; } & {
+    const Instantiate: <InstanceName extends InstanceNames = InstanceNames, T extends CreatableInstances[InstanceName] = CreatableInstances[InstanceName], Properties extends RQueryInstanceProperties<T> = Partial<{ [K in keyof T]: T[K]; } & {
         Children?: Instance[];
         Attributes?: Record<string, AttributeValue>;
     }>, Return = $<T & {
@@ -46,7 +46,7 @@ export declare namespace RQuery {
      * @param properties properties of {@link inst}
      * @returns the {@link inst} but cooler
      */
-    const Propertize: <T extends Instance>(inst: T, properties: InstanceProperties<T>) => T;
+    const Propertize: <T extends Instance>(inst: T, properties: RQueryInstanceProperties<T>) => T;
     /**
      * @param parent instance to get from
      * @example
@@ -62,7 +62,7 @@ export declare namespace RQuery {
      * RQuery.Path("*@Baseplate\\*Texture")
      * @returns given type or default {@link Instance}
      */
-    const Path: <T extends Instance>(path: Stuff, parent?: Instance, timeout?: number) => T;
+    const Path: <T extends Instance>(path: RQueryDirectory, parent?: Instance, timeout?: number) => T;
     /**
      * @param parent instance to get from
      * @example
@@ -78,13 +78,12 @@ export declare namespace RQuery {
      * RQuery.UnreliablePath("*@Baseplate\\*Texture")
      * @returns given type or default {@link Instance}
      */
-    const UnreliablePath: <T extends Instance>(path: Stuff, parent?: Instance, timeout?: number) => T | undefined;
+    const UnreliablePath: <T extends Instance>(path: RQueryDirectory, parent?: Instance, timeout?: number) => T | undefined;
 }
-type nonStrictString = (string & {});
 type ServiceName = keyof typeof Services;
-type Stuff = "@" | "Client\\" | "Server\\" | "Shared\\" | "LocalPlayer\\" | "Character\\" | "Gui\\" | `${ServiceName}\\` | nonStrictString;
+export type RQueryDirectory = "@" | "Client\\" | "Server\\" | "Shared\\" | "LocalPlayer\\" | "Character\\" | "Gui\\" | `${ServiceName}\\` | NonStrictString;
 type InstanceNames = Extract<keyof CreatableInstances, string>;
-type InstanceProperties<T> = Partial<{
+export type RQueryInstanceProperties<T> = Partial<{
     [K in keyof T]: T[K];
 } & {
     Children?: Instance[];
