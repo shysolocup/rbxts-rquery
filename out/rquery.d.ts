@@ -26,7 +26,7 @@ declare global {
 
     //#region Tags
 
-    interface RQueryTagsBase {
+    interface RQueryDefaultTags {
         UniqueName: true
     }
 
@@ -35,12 +35,12 @@ declare global {
      * 
      * note: UniqueName comes with the base tags
      * @example
-     * interface RQueryTags extends RQueryTagsBase {
+     * interface RQueryTags extends RQueryDefaultTags {
      *      DummyModel: true,
      *      MapPart: true
      * }
      */
-    interface RQueryTags extends RQueryTagsBase {}
+    interface RQueryTags extends RQueryDefaultTags {}
 
     //#endregion
 
@@ -99,7 +99,7 @@ declare global {
 
     type RQueryBase = Instance & {
         $attributes?: Record<string, AttributeValue>,
-        $tags?: ((keyof RQueryTagsBase) | nonStrictString)[]
+        $tags?: ((keyof RQueryDefaultTags) | nonStrictString)[]
     }
     
     //#endregion  

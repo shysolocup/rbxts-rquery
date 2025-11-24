@@ -262,10 +262,8 @@ export namespace RQuery {
 
 //#region Helper Types
 
-type nonStrictString = (string & {});
-
 type ServiceName = keyof typeof Services;
-export type RQueryDirectory = "@" | "Client\\" | "Server\\" | "Shared\\" | "LocalPlayer\\" | "Character\\" | "Gui\\" | `${ServiceName}\\` | nonStrictString;
+export type RQueryDirectory = "@" | "Client\\" | "Server\\" | "Shared\\" | "LocalPlayer\\" | "Character\\" | "Gui\\" | `${ServiceName}\\` | NonStrictString;
 
 type InstanceNames = Extract<keyof CreatableInstances, string>
 export type RQueryInstanceProperties<T> = Partial<

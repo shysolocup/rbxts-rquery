@@ -1,14 +1,14 @@
 import { RQuery } from ".";
 
-type guh = $<Part & {
+type guhType = $<Part & {
+    $tags: [
+        "Agh"
+    ]
     $attributes: {
-        guh: 5
-    }
-
-    decal: Decal,
-    surface: SurfaceGui & {
-        img: ImageLabel
+        guh: 1
     }
 }>
 
-const part = RQuery.Path<guh>("Workspace\\Part");
+const guh = RQuery.Path<guhType>("Workspace\\*Part");
+
+guh.GetAttribute("")

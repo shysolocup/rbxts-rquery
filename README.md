@@ -147,7 +147,7 @@ also, you can overwrite the base tags and attributes like indexing children norm
 ```ts
 // yourproject/src/rquery.d.ts
 
-interface RQueryTags extends RQueryTagsBase {
+interface RQueryTags extends RQueryDefaultTags {
     guh: true
 }
 
@@ -202,7 +202,7 @@ const part = RQuery.Instantiate("Part", {
 
     "Tags": [
         "AwesomePart"
-    ]
+    ],
 
     "Children": [
         RQuery.Instantiate("Decal", {
